@@ -30,7 +30,17 @@ Configure the target subnet in `config.py`, then run:
 sudo python main.py
 ```
 
-The program performs a single network scan and updates `addresses.json`.
+The program performs a network scans with the default interval and updates `addresses.json`.
+
+Arguments:
+--subnet - Subnet to scan
+--interval - Interval for scans (in seconds)
+--timeout - Timeout for the ARP scan (in seconds)
+
+Example:
+```bash
+sudo python main.py --subnet "192.168.69.0/27" --interval 60 --timeout 2
+```
 
 ## Status
 
