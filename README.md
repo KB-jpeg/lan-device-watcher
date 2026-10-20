@@ -33,14 +33,21 @@ sudo python main.py
 The program performs a network scans with the default interval and updates `addresses.json`.
 
 Arguments:
---subnet - Subnet to scan
---interval - Interval for scans (in seconds)
---timeout - Timeout for the ARP scan (in seconds)
+- `--subnet` - Subnet to scan
+- `--interval` - Interval for continuous scanning (in seconds)
+- `--timeout` - Timeout for the ARP scan (in seconds)
+- `--rename` - Rename or pre-register a MAC address
 
-Example:
+Examples:
 ```bash
 sudo python main.py --subnet "192.168.69.0/27" --interval 60 --timeout 2
 ```
+Scans subnet 192.168.69.0/27 every 60 seconds with a timeout of 2 seconds
+
+```bash
+sudo python main.py --rename "02:4A:8E:3B:11:F0" "Homelab" --rename "06:3A:8E:B4:12:F5" "PC"
+```
+Sets a custom name "Homelab" for the MAC address 02:4A:8E:3B:11:F0 and "PC" for 06:3A:8E:B4:12:F5. This can be used before the device is first discovered.
 
 ## Status
 
