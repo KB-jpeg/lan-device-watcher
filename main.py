@@ -3,7 +3,8 @@ import datetime as dt
 import time as t
 import argparse
 from file_management import load_inventory, update_inventory, save_inventory, set_mac_name
-from config import default_subnet, arp_request_timeout, run_continous, default_interval
+from config import default_subnet, arp_request_timeout, run_continous, default_interval, new_device_notifications, ip_change_notifications
+from notifications import send_notification
 
 def get_addresses(subnet, timeout): # Returns a dict of MAC addresses (MAC : IP)
     addresses = {}
@@ -23,8 +24,12 @@ def scan(subnet=default_subnet, timeout=arp_request_timeout):
             name = f"{updated_inventory[update].get("Name")} ({update})" if updated_inventory[update].get("Name") else update
             if updates[update] == "changed":
                 print(f"[{timestamp}] {name} has changed its IP from {updated_inventory[update]["IPs"][-2]} to {updated_inventory[update]["IPs"][-1]}")
+                if ip_change_notifications:
+                    send_notification("IP Change", f"[{timestamp}] {name} has changed its IP from {updated_inventory[update]["IPs"][-2]} to {updated_inventory[update]["IPs"][-1]}")
             elif updates[update] == "new":
                 print(f"[{timestamp}] New device found: {name}")
+                if new_device_notifications:
+                    send_notification("New Device", f"[{timestamp}] New device found: {name}")
     else:
         print(f"[{dt.datetime.now().strftime("%H:%M:%S")}] Ran scan. No new updates")
 
@@ -39,7 +44,7 @@ if args.rename is not None:
     if args.subnet is not None:
         print("--subnet cannot be used with --rename")
         quit(1)
-    elif args.interval is not None: # Should I use if or elif in these??
+    elif args.interval is not None:
         print("--interval cannot be used with --rename")
         quit(1)
     elif args.timeout is not None:
