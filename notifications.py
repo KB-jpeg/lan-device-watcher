@@ -9,6 +9,7 @@ def send_notification(title, data):
             "Title": title,       # Optional: Adds a bold title
             "Priority": "high",            # Optional: max, high, default, low, min
             "Tags": ""  # Optional: Adds emojis/icons
-        }
+        },
+        timeout=5
     )
 

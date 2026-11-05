@@ -56,8 +56,6 @@ if args.rename is not None:
         print(f"Successfully set custom name \"{name}\" for {mac}")
     quit(0)
 
-
-
 if args.interval is not None and args.interval < 0:
     parser.error("--interval must be nonnegative")
 if args.timeout is not None and args.timeout <= 0:

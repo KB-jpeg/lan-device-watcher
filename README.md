@@ -9,12 +9,7 @@ A Python-based network discovery tool that uses ARP scanning to identify devices
 - Track IP address changes for known devices.
 - Maintain a persistent JSON inventory.
 - Record first-seen and last-seen timestamps.
-
-## Requirements
-
-- Python 3
-- Scapy
-- Network access with permissions to send ARP packets
+- Send ntfy notifications.
 
 ## Usage
 
@@ -49,8 +44,4 @@ sudo python main.py --rename "02:4A:8E:3B:11:F0" "Homelab" --rename "06:3A:8E:B4
 ```
 Sets a custom name "Homelab" for the MAC address 02:4A:8E:3B:11:F0 and "PC" for 06:3A:8E:B4:12:F5. This can be used before the device is first discovered.
 
-## Status
-
-**Early prototype (v0.1.0)**
-
-This project is under active development. Current functionality is limited to local ARP discovery and tracking newly detected devices and IP address changes.
+Set your ntfy_topic and turn on your notifications in config.py to get ntfy notifications.
